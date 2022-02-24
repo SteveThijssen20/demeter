@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { Button, Grid, makeStyles } from "@material-ui/core";
 import './index.scss'
 import '@/near-contracts/contract';
+import Router from 'next/router'
 
 import * as nearAPI from "near-api-js"
 import getConfig from "@/config"
@@ -91,9 +92,12 @@ export function Nav(): JSX.Element {
                 <li>
                     <div id='withoutSign' className="wallets">
                         <div className="wallet">
-                            <button type="button" onClick={() => (window.location.href = "/login")} className="btn btn-secondary" aria-disabled="false">
-                                Login
-                            </button>
+                            <NavLink to="/login?[/donation]">
+
+                                <button type="button" className="btn btn-secondary" aria-disabled="false">
+                                    Login
+                                </button>
+                            </NavLink>
                         </div>
                     </div>
 

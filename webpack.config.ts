@@ -91,6 +91,13 @@ export default (_: any, options: any): WebpackConfig => {
             inject: false,
         })
         , new HtmlWebpackPlugin({
+            title: 'Demeter - Login',
+            favicon: 'public/favicon.ico',
+            filename: path.resolve(__dirname, 'dist/login/index.html'),
+            template: 'public/index.html',
+            inject: false,
+        })
+        , new HtmlWebpackPlugin({
             title: 'Demeter - Create Events',
             favicon: 'public/favicon.ico',
             filename: path.resolve(__dirname, 'dist/CreateEvents/index.html'),

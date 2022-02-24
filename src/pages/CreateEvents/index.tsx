@@ -7,6 +7,8 @@ import UseFormInput from '@/components/components/UseFormInput';
 import { createEventAPI, createEventCategoryAPI } from '@/pages/Events/event';
 import { CreatePlugin } from '@/pages/Events/event';
 import { Icon } from '@/components/common/Icon'
+import { NavLink } from 'react-router-dom'
+import Router from 'next/router'
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import {
@@ -89,8 +91,8 @@ export default function CreateEvents() {
             error: "Please try again later",
             success: "Event has created on Aurora!"
         })
-      window.location.href="/donation";
-        
+        window.location.href = "/donation";
+
     }
 
     async function CreateCateCategories(eventID) {
@@ -245,6 +247,43 @@ export default function CreateEvents() {
         fetchData();
     }, []);
 
+    function CreateCategoryButton(): JSX.Element {
+        if (window.localStorage.getItem("Type") != "manager") {
+            return (<>
+                  <NavLink to="/login?[/CreateEvents]">
+                         <Button style={{ margin: "17px 0 0px 0px", width: "100%" }}>
+                    Login as Event Manager
+                </Button>
+                  </NavLink>
+             
+            </>);
+        }
+        return (<>
+            <Button style={{ margin: "17px 0 0px 0px", width: "100%" }} onClick={CreateCategory}>
+                Create Category
+            </Button>
+        </>)
+    }
+
+    function CreateEventButton(): JSX.Element {
+        if (window.localStorage.getItem("Type") != "manager") {
+            return (<>
+                <NavLink to="/login?[/CreateEvents]">
+                    <Button style={{ margin: "17px 0 0px 0px", width: "100%" }}>
+                        Login as Event Manager
+                    </Button>
+
+                </NavLink>
+
+            </>);
+        }
+        return (<>
+            <Button style={{ margin: "17px 0 0px 0px", width: "100%" }} onClick={CreateEvent}>
+                Create Event
+            </Button>
+        </>)
+    }
+
     return (
         <><>
             <Row>
@@ -346,9 +385,7 @@ export default function CreateEvents() {
                         </div>
 
 
-                        <Button style={{ margin: "17px 0 0px 0px", width: "100%" }} onClick={CreateEvent}>
-                            Create Event
-                        </Button>
+                        <CreateEventButton />
                     </div>
                 </Col>
 
@@ -401,9 +438,7 @@ export default function CreateEvents() {
                             id={"cat_image"}
                         />
                     </div>
-                    <Button style={{ margin: "17px 0 0px 0px", width: "100%" }} onClick={CreateCategory}>
-                        Create Category
-                    </Button>
+                    <CreateCategoryButton />
                 </div>
             </Modal>
         </></>

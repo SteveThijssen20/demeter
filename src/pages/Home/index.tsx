@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom'
 import LOGINModal from '@/modals/login';
 
 export default function Home() {
-	
-    const [modalShow, setModalShow] = useState(false);
-	function DonateButton(){
-		setModalShow(true);
+
+	const [modalShow, setModalShow] = useState(false);
+	function DonateButton() {
+
 	}
 
 	return (<>
@@ -23,33 +23,37 @@ export default function Home() {
 				</div>
 			</div>
 			<div className="row">
-				<div style={{ 'width': '690px'}} className="col">
+				<div style={{ 'width': '690px' }} className="col">
 					<div className="text-center">
-						<h4 style={{ fontSize: '20px'}}>Demeter creates the most easy, transparent and fun NFT charity auction on Web3, by helping charities raise additional support!</h4>
+						<h4 style={{ fontSize: '20px' }}>Demeter creates the most easy, transparent and fun NFT charity auction on Web3, by helping charities raise additional support!</h4>
 					</div>
 				</div>
 			</div>
 			<div className="row">
 				<div style={{ width: '250px' }} className="col">
-					<div onClick={DonateButton} style={{
-						background: '#ecc900',
-						textAlign: 'center',
-						cursor: 'pointer',
-						height: '73px',
-						padding: '36px 0',
-						width: '100%',
-						margin: '0'
-					}} className="card card-body">
-							<div onClick={DonateButton} className="card-body">Let’s donate!</div>
-					</div>
+					<NavLink to="/login?[/donation]">
+
+						<div style={{
+							background: '#ecc900',
+							textAlign: 'center',
+							cursor: 'pointer',
+							height: '73px',
+							padding: '36px 0',
+							width: '100%',
+							margin: '0'
+						}} className="card card-body">
+							<div className="card-body">Let’s donate!</div>
+						</div>
+					</NavLink>
 				</div>
+
 			</div>
 			<div className="Event row">
 				<img style={{ 'padding': '0', width: '-webkit-fill-available' }} src="https://www.metisgift.com/Event/Panel.svg" />
 				<img style={{ "position": "absolute", "bottom": "0" }} src="https://www.metisgift.com/Event/Group.svg" />
 				<img style={{ "padding": "0px", "position": "absolute", "width": "56%", "marginTop": "10%" }} src="https://www.metisgift.com/Event/CharityText.svg" />
 				<div className="card-body EventBTN">
-					<NavLink to="/CreateEvents">
+					<NavLink to="/login?[/CreateEvents]">
 						<div>
 							Start event
 						</div>
@@ -57,12 +61,7 @@ export default function Home() {
 				</div>
 			</div>
 		</div>
-		<LOGINModal  
-		show={modalShow}
-		onHide={() => setModalShow(false)}
-        redirecting = "/donation"
-				/>
 	</>
-	
+
 	);
 }

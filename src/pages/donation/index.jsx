@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
 import DonateNFTModal from '../../components/components/modals/DonateNFTModal';
 import './donation.css';
-
+import Router from 'next/router'
 export default function Donation() {
     const [CreatemodalShow, setModalShow] = useState(false);
 
@@ -245,6 +245,7 @@ export default function Donation() {
                             }}>
                                 <div style={{ "display": "flex", gap: "14px" }}>
                                     {(window.localStorage.getItem('Type') == "" || window.localStorage.getItem('Type') == null) ? (
+
                                         <div style={{
                                             color: 'white',
                                             overflow: 'hidden',
@@ -255,12 +256,15 @@ export default function Donation() {
                                             width: '244px',
                                             float: 'right',
                                             padding: '0px'
-                                        }} onClick={(e) => { window.location.href = '/login' }} >
-                                            <div className="card-body" style={{ height: '100%', paddingTop: '34px' }} >
-                                                Login
-                                            </div>
+                                        }} >
+                                            <NavLink to="/login?[/donation]">
+                                                <div className="card-body" style={{ height: '100%', paddingTop: '34px' }} >
+                                                    Login
+                                                </div>
+                                            </NavLink>
+
                                         </div>
-                                   ) : (window.localStorage.getItem('Type') == "user" ? (<>
+                                    ) : (window.localStorage.getItem('Type') == "user" ? (<>
                                         <div style={{
                                             color: 'white',
                                             overflow: 'hidden',

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import * as nearAPI from "near-api-js"
-
+import Router from 'next/router'
 import BidNFTModal from '../../../components/components/modals/BidNFTModal';
 import ViewBidNFTModal from '../../../components/components/modals/ViewBidNFTModal';
 
@@ -194,7 +194,7 @@ export default function Auction() {
 
     function calculateTimeLeft() {
         if ((window.localStorage.getItem('Type') == "" || window.localStorage.getItem('Type') == null)) {
-            window.location.href = "/login";
+            Router.push("/login?[/donation]");
         }
         try {
             var allDates = document.getElementsByName("dateleft");
@@ -212,7 +212,7 @@ export default function Auction() {
 
     function activateViewBidModal(e) {
         if ((window.localStorage.getItem('Type') == "" || window.localStorage.getItem('Type') == null)) {
-            window.location.href = "/login";
+            Router.push("/login?[/donation]");
         }
 
         setselectrecid(e.target.getAttribute("recid"));
@@ -224,7 +224,7 @@ export default function Auction() {
 
     function activateBidNFTModal(e) {
         if ((window.localStorage.getItem('Type') == "" || window.localStorage.getItem('Type') == null)) {
-            window.location.href = "/login";
+            Router.push("/login?[/donation]");
         }
 
         setselectrecid(e.target.getAttribute("recid"));
@@ -237,7 +237,7 @@ export default function Auction() {
     function addtoLottery(e) {
 
         if ((window.localStorage.getItem('Type') == "" || window.localStorage.getItem('Type') == null)) {
-            window.location.href = "/login";
+            Router.push("/login?[/donation]");
         }
 
         setselectid(e.target.getAttribute("tokenid"));
@@ -353,10 +353,13 @@ export default function Auction() {
                     width: '244px',
                     float: 'right',
                     padding: '0px'
-                }} onClick={(e) => { window.location.href = '/login' }} >
-                    <div className="card-body" style={{ height: '100%', paddingTop: '34px' }} >
-                        Login
-                    </div>
+                }} >
+                    <NavLink to="/login?[/donation]">
+                        <div className="card-body" style={{ height: '100%', paddingTop: '34px' }} >
+                            Login
+                        </div>
+                    </NavLink>
+
                 </div>
             </>)
         }
@@ -381,7 +384,7 @@ export default function Auction() {
         return (<>
 
             <NavLink to={`/lottery?[${RealEventId}]`}>
-                <div style={{ display: 'flex', gap: '14px', position: 'absolute', right: '208px' }} >
+                <div style={{ display: 'flex', gap: '14px', position: 'absolute', right: '80px' }} >
                     <div className="card" style={{ color: 'white', overflow: 'hidden', background: 'rgb(236, 201, 0)', textAlign: 'center', width: '172px', cursor: 'pointer', height: '48px', margin: '0', padding: '0px' }}>
                         <div className="card-body" style={{ height: '100%', paddingTop: '21px', fontSize: '21px' }}>Go to lottery</div>
                     </div>
@@ -465,14 +468,15 @@ export default function Auction() {
                                 </div>
                                 <div className='BidAllcontainer' >
                                     <div className='Bidsbutton'>
-                                        <div style={{ width: '168px' }} tokenid={listItem.Id} recid={listItem.recId} title={listItem.name} onClick={activateViewBidModal} className="Bidcontainer col">
-                                            <div tokenid={listItem.Id} recid={listItem.recId} title={listItem.name} className="card BidcontainerCard">
-                                                <div tokenid={listItem.Id} recid={listItem.recId} title={listItem.name} className="card-body bidbuttonText">View</div>
-                                            </div>
-                                        </div>
+
 
                                         {listItem.lottery != "true" ? (<>
-                                            {(selectwallet != currentWallet) ? (<>
+                                            {(window.localStorage.getItem("Type") == "user") ? (<>
+                                                <div style={{ width: '168px' }} tokenid={listItem.Id} recid={listItem.recId} title={listItem.name} onClick={activateViewBidModal} className="Bidcontainer col">
+                                                    <div tokenid={listItem.Id} recid={listItem.recId} title={listItem.name} className="card BidcontainerCard">
+                                                        <div tokenid={listItem.Id} recid={listItem.recId} title={listItem.name} className="card-body bidbuttonText">View</div>
+                                                    </div>
+                                                </div>
                                                 <div style={{ width: '168px' }} tokenid={listItem.Id} wallet={listItem.wallet} recid={listItem.recId} highestbid={listItem.price} goalScore={goal} className="Bidcontainer col" onClick={activateBidNFTModal}>
                                                     <div tokenid={listItem.Id} wallet={listItem.wallet} recid={listItem.recId} highestbid={listItem.price} className="card BidcontainerCard">
                                                         <div tokenid={listItem.Id} wallet={listItem.wallet} recid={listItem.recId} highestbid={listItem.price} className="card-body bidbuttonText">Bid</div>
@@ -481,7 +485,7 @@ export default function Auction() {
                                             </>) : (<></>)}
 
 
-                                            {((selectwallet == currentWallet) ? (
+                                            {((window.localStorage.getItem("Type") == "manager") && (selectwallet == currentWallet) ? (
                                                 <div style={{ width: '224px' }} tokenid={listItem.Id} wallet={listItem.wallet} recid={listItem.recId} highestbid={listItem.price} goalScore={goal} className="Bidcontainer col" onClick={addtoLottery}>
                                                     <div tokenid={listItem.Id} wallet={listItem.wallet} recid={listItem.recId} highestbid={listItem.price} className="card BidcontainerCard" onClick={addtoLottery} >
                                                         <div tokenid={listItem.Id} wallet={listItem.wallet} recid={listItem.recId} highestbid={listItem.price} className="card-body bidbuttonText" onClick={addtoLottery}>Add to Lottery</div>
@@ -553,6 +557,7 @@ export default function Auction() {
 
                 }}
                 EventID={RealEventId}
+                EventeRecID={eventId}
                 type={selecttype}
                 SelectedTitle={title}
                 enddate={date}

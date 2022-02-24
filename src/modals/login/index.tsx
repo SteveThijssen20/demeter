@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import React from 'react';
 import './app.css';
 import Button from 'react-bootstrap/Button';
+import Router from 'next/router'
+
 
 import { ContentLoader } from '@/components/common/ContentLoader'
 import { useState, useEffect, useMemo } from "react";

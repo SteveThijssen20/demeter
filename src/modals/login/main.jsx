@@ -16,6 +16,19 @@ import './main.css'
 window.nearConfig = getConfig("development");
 export default function CreateEvents() {
     const [modalShow, setModalShow] = useState(false);
+    const regex = /\[(.*)\]/g;
+    const str = decodeURIComponent(window.location.search);
+    let m;
+    let redirecting = "";
+    while ((m = regex.exec(str)) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }
+        redirecting = m[1];
+    }
+
+
 
     function TypeSet(e) {
         window.localStorage.setItem("Type", e.target.getAttribute("type"));
@@ -78,7 +91,7 @@ export default function CreateEvents() {
             <LOGINModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                redirecting="/donation"
+                redirecting={redirecting}
             />
         </></>
     );

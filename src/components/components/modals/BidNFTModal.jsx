@@ -347,7 +347,7 @@ export default function BidNFTModal({
 										(<div style={{ width: "33%", padding: "0 10px", marginBottom: "10px" }} key={category.id} onClick={() => unselectCategory(category.id)}>
 											<div style={{ background: "white", padding: "8px 15px", border: "1px solid transparent", borderRadius: "5px", alignItems: "center", }}>
 												<h4 style={{ marginBottom: "10px", color: "#151F28", textAlign: "center" }}>{category.title}</h4>
-												<img src={category.image} style={{ width: "100%", borderRadius: "5px", height: "94px" }} />
+												<img src={category.image} style={{ aspectRatio: '1', borderRadius: "5px"}} />
 												<h5 style={{ color: "#151F28", textAlign: "center", marginTop: "10px", lineHeight: "14px" }}>{category.amount * category.price} USD</h5>
 												<h5 style={{ color: "#151F28", textAlign: "center", lineHeight: "14px" }}>({category.amount} pieces)</h5>
 
@@ -373,7 +373,7 @@ export default function BidNFTModal({
 										(<div style={{ width: "33%", padding: "0 10px", marginBottom: "10px" }} key={category.id} onClick={() => selectCategory(category.id)}>
 											<div style={{ background: "white", padding: "8px 15px", border: "1px solid transparent", borderRadius: "5px", alignItems: "center", }}>
 												<h4 style={{ marginBottom: "10px", color: "#151F28", textAlign: "center" }}>{category.title}</h4>
-												<img src={category.image} style={{ width: "100%", borderRadius: "5px", height: "94px" }} />
+												<img src={category.image} style={{aspectRatio: '1', borderRadius: "5px" }} />
 												<h5 style={{ color: "#151F28", textAlign: "center", marginTop: "10px", lineHeight: "14px" }}>{category.amount * category.price} USD</h5>
 												<h5 style={{ color: "#151F28", textAlign: "center", lineHeight: "14px" }}>({category.amount} pieces)</h5>
 

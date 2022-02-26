@@ -78,7 +78,7 @@ export default function Login({
             'Demeter');
     }
     async function onClickConnectedNEAR() {
-     //   window.location.href = (redirecting);
+        //   window.location.href = (redirecting);
     }
     async function onClickDisConnectNEAR() {
         await window.walletAccount.signOut()
@@ -95,6 +95,23 @@ export default function Login({
                 break;
             } catch (ex) { continue };
         }
+
+        if (window.ethereum == null) {
+            return (<>
+                <div onClick={() => { window.open("https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn", "_blank") }} style={{ display: "flex", padding: "10px", width: "350px", borderRadius: "5px", cursor: "pointer", margin: "20px 0" }} className="btn-primary whitebtn">
+                    <img style={{ height: '51px', width: '51px' }} src='https://i.postimg.cc/3wCZzRCV/Aurora.jpg' />
+                    <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '11px', height: '51px' }}>
+                        <span style={{ fontWeight: 'bolder', padding: '0', fontFamily: 'sans-serif', height: '100%', margin: '-12px 0' }}>
+                            Aurora
+                        </span>
+                        <span style={{ fontSize: '15px', padding: '0', margin: '0', fontFamily: 'sans-serif' }}>
+                            Install Metamask wallet
+                        </span>
+                    </div>
+                </div>
+            </>)
+        }
+
         return (
             <>
                 {window.ethereum.selectedAddress == null ? (
@@ -111,7 +128,7 @@ export default function Login({
                     </div>
                 ) : (
                     <div style={{ display: "flex", padding: "10px", borderRadius: "5px", cursor: "pointer", width: "350px", margin: "20px 0" }} className="btn-primary whitebtn active">
-                        <div onClick={onClickConnectedAurora} style={{ display: 'flex',  background: 'transparent', width: '100%', padding: '0' }} className="btn-primary">
+                        <div onClick={onClickConnectedAurora} style={{ display: 'flex', background: 'transparent', width: '100%', padding: '0' }} className="btn-primary">
                             <img style={{ height: '51px', width: '51px' }} src='https://doc.aurora.dev/img/favicon.svg' />
                             <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '11px', height: '51px' }}>
                                 <span style={{ fontWeight: 'bolder', padding: '0', fontFamily: 'sans-serif', height: '100%', margin: '-12px 0' }}>
